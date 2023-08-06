@@ -7,8 +7,8 @@ all: bbm_c
 run: bbm_c
 	./bbm
 
-bbm_c: debug_c readsys_c notifications_c mock_c
-	$(CC) $(CFLAGS) $(CLIBS) -o bbm notifications.o debug.o readsys.o mock.o bbm.c 
+bbm_c: debug_c readsys_c notifications_c sleep_c
+	$(CC) $(CFLAGS) $(CLIBS) -o bbm notifications.o debug.o readsys.o mock.o sleep.o bbm.c 
 
 readsys_c: debug_c
 	$(CC) $(CFLAGS) -c readsys.c
@@ -22,17 +22,20 @@ debug_c:
 mock_c:
 	$(CC) $(CFLAGS) -c mock.c
 
+sleep_c:
+	$(CC) $(CFLAGS) -c sleep.c
+
 clean:
 	rm -f *.o bbm
 
-debug: CFLAGS += -DDEBUG
+debug: CFLAGS += -DBBM_DEBUG
 debug: bbm_c
 	./bbm
 
-mock: CFLAGS += -DMOCK
-mock: bbm_c
+mock: CFLAGS += -DBBM_MOCK
+mock: mock_c bbm_c
 	./bbm
 
-debug_and_mock: CFLAGS += -DDEBUG -DMOCK
+debug_and_mock: CFLAGS += -DBBM_DEBUG -DBBM_MOCK
 debug_and_mock: bbm_c
 	./bbm

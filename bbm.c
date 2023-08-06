@@ -6,6 +6,7 @@
 #include "strings.h"
 #include "debug.h"
 #include "mock.h"
+#include "sleep.h"
 
 
 #define DELAY 1
@@ -86,6 +87,8 @@ int main(int argc, char *argv[]) {
     lv = battery_level();
     ch = charging();
 
+    detect_suspend(blv, lv);
+
     if(blv > lv) {
       // discharging
       debug("Battery discharging: %d => %d%%\n", blv, lv);
@@ -113,6 +116,7 @@ int main(int argc, char *argv[]) {
         debug("Charger disconnected\n");
       }
     }
+    start_sleep();
     sleep(DELAY);
   }
 }

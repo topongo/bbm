@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 
 void debug(const char *fmt, ...) {
-#if defined(DEBUG)
+#if defined(BBM_DEBUG)
   va_list args;
   va_start(args, fmt);
   fprintf(stderr, "==DBG=> ");

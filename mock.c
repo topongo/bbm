@@ -1,10 +1,8 @@
-#if defined(BBM_MOCK)
-
 #include "mock.h"
-
 #include <fcntl.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <sys/stat.h>
 #include "readsys.h"
 #include "debug.h"
 
@@ -18,7 +16,7 @@ void create_files() {
   close(fd2);
 }
 
-void debug_init() {
+void mock_init() {
   debug("Debugging enabled!\n");
  
   debug("Checking for mock files...\n");
@@ -38,6 +36,4 @@ void debug_init() {
     close(fd2);
   }
 }
-
-#endif
 

@@ -2,9 +2,7 @@
 #define __READSYS_H__
 
 #if defined(BBM_MOCK)
-  #define BBM_MOCK_DIR "mock/bbm"
-  #define BBM_BATTERY_FILE "mock/capacity"
-  #define BBM_CHARGE_FILE "mock/charging"
+  #include "mock.h"
 #else
   #define BBM_BATTERY_FILE "/sys/class/power_supply/BAT0/capacity"
   #define BBM_CHARGE_FILE "/sys/class/power_supply/ACAD/online"
