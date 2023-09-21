@@ -23,8 +23,7 @@ void send_low_warnings(int level, int *threshold) {
     if(level <= NORMAL_WARNINGS[i]) {
       if (*threshold > NORMAL_WARNINGS[i])
         lowest = NORMAL_WARNINGS[i];
-    } else {
-      if(lowest == 101)
+    } else if(lowest == 101) {
         return;
     }
   }
@@ -34,16 +33,19 @@ void send_low_warnings(int level, int *threshold) {
       if (*threshold > CRITICAL_WARNINGS[i]) {
         lowest = -CRITICAL_WARNINGS[i];
       }
-    } else break;
+    } 
   }
   debug("Battery warning: %d%%\n", level);
 
+  if (lowest == 101) return;
+
   if(lowest < 0) {
     ntf_send("Critical: battery below %d%%!", -lowest);
+    *threshold = -lowest;
   } else {
     ntf_send("Warning: battery below %d%%!", lowest);
+    *threshold = lowest;
   }
-  *threshold = lowest;
 }
 
 void send_high_warnings(int level, int *threshold) {

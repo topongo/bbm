@@ -7,7 +7,7 @@ all: bbm_c
 run: bbm_c
 	./bbm
 
-bbm_c: debug_c readsys_c notifications_c sleep_c
+bbm_c: debug_c readsys_c notifications_c sleep_c mock_c
 	$(CC) $(CFLAGS) $(CLIBS) -o bbm notifications.o debug.o readsys.o mock.o sleep.o bbm.c 
 
 readsys_c: debug_c

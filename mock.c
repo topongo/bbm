@@ -1,3 +1,5 @@
+#if defined(BBM_MOCK)
+
 #include "mock.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -36,4 +38,6 @@ void mock_init() {
     close(fd2);
   }
 }
+
+#endif
 
