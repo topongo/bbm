@@ -2,6 +2,7 @@
 #include "notifications.h"
 #include "debug.h"
 #include <time.h>
+#include <stdlib.h>
 
 time_t last_sleep = 0;
 
@@ -15,8 +16,8 @@ void detect_suspend(int blevel, int level) {
   if(now - last_sleep > 60 && blevel != level) {
     debug("Suspend detected\n");
     if(blevel != level) {
-      const char *act = blevel < level ? "dropped" : "increased";
-      ntf_send("Battery level has %s by %d%%", act, level - blevel);
+      const char *act = blevel > level ? "dropped" : "increased";
+      ntf_send("Battery level has %s by %d%% during suspension.", act, abs(level - blevel));
     }
   }
 }
